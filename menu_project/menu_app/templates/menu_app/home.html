@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% load menu_tags %}
+  {% draw_menu 'main_menu' %}
+
+  <ul>
+    {% for item in menu_items %}
+      <li {% if active_url == item.url %}class="active"{% endif %}>
+        <a href="{{ item.url }}">{{ item.title }}</a>
+        {% if item.children.all %}
+          <ul>
+            {% for child in item.children.all %}
+              <li {% if active_url == child.url %}class="active"{% endif %}>
+                <a href="{{ child.url }}">{{ child.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </li>
+    {% endfor %}
+  </ul>
+
+  <!-- Debugging Info -->
+  <h2>Debugging Info:</h2>
+  <pre>Menu Items: {{ menu_items }}</pre>
+  <p>Active URL: {{ active_url }}</p>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% load menu_tags %}
+  {% draw_menu menu_name %}
+
+  <ul>
+    {% for item in menu_items %}
+      <li {% if active_url == item.url %}class="active"{% endif %}>
+        <a href="{{ item.url }}">{{ item.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock %}
